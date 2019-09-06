@@ -94,28 +94,6 @@ class Program
         Console.WriteLine("search");
         Console.WriteLine("help");
     }
-    void Remove()
-    {
-        Console.Write("Whats the name of the dog you want to remove?: ");
-        string input = Console.ReadLine();
-        int nameCount = 0;
-        for(int i = 0; i < dogs.Count; i++)
-        {
-            if(dogs[i].Name == input)
-            {
-                nameCount++;
-            }
-        }
-        
-        for(int i = 0; i < dogs.Count; i++)
-        {
-            if(dogs[i].Name == input && nameCount <= 1)
-            {
-                Console.WriteLine("Successfully removed the dog named {0}", dogs[i].Name);
-                dogs.Remove(dogs[i]);
-            }
-        }
-    }
 
     void Search()
     {
@@ -137,7 +115,7 @@ class Program
         }
         else if (count == 0)
         {
-            Console.WriteLine("There are no dogs with the name {0}", dogs[g_i].Name);
+            Console.WriteLine("There are no dogs with the name {0}", name);
         }
         else
         { 
@@ -157,13 +135,59 @@ class Program
                 Console.WriteLine("{0} named {1} was found at index {2}, here is a more detailed look: ", dogs[g_i].Breed, dogs[g_i].Name, g_i);
                 Console.WriteLine(dogs[g_i].GetAsString());
             }
-            if(count == 0)
+            else if(count == 0)
             {
-                Console.WriteLine("There are no dogs with the breed {0} named {1}", dogs[g_i].Breed, dogs[g_i].Name);
+                Console.WriteLine("There are no dogs with the breed {0} named {1}", breed, name);
             }
             else 
             {
-                //Check more................
+                count = 0;
+                Console.Write("There are multiple dogs with that breed, please specify by entering it's gender: ");
+                string gender = Console.ReadLine();
+                for(int i = 0; i < dogs.Count; i++)
+                {
+                    if(dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender)
+                    {
+                        count++;
+                        g_i = i;
+                    }
+                }
+                if(count == 1)
+                {
+                    Console.WriteLine("{0} named {1} was found at index {2}, here is a more detailed look: ", dogs[g_i].Breed, dogs[g_i].Name, g_i);
+                    Console.WriteLine(dogs[g_i].GetAsString());
+                }
+                else if(count == 0)
+                {
+                    Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2}", breed, name, gender);
+                }
+                else 
+                {
+                    //again......
+                }
+            }
+        }
+    }
+    
+    void Remove() // SAMMA SOM SEARCH SEDAN.........
+    {
+        Console.Write("Whats the name of the dog you want to remove?: ");
+        string input = Console.ReadLine();
+        int nameCount = 0;
+        for(int i = 0; i < dogs.Count; i++)
+        {
+            if(dogs[i].Name == input)
+            {
+                nameCount++;
+            }
+        }
+        
+        for(int i = 0; i < dogs.Count; i++)
+        {
+            if(dogs[i].Name == input && nameCount <= 1)
+            {
+                Console.WriteLine("Successfully removed the dog named {0}", dogs[i].Name);
+                dogs.Remove(dogs[i]);
             }
         }
     }
