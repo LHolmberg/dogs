@@ -79,7 +79,7 @@ class Program
             if(!incorrect)
                 Console.WriteLine("Please, enter a number!");
         }
-        
+
         Console.Write("Breed: ");
         breed = Console.ReadLine().ToLower();
 
@@ -91,7 +91,7 @@ class Program
                 Console.WriteLine("A {0} named {1} was added", breed, name);
                 dogs.Add(new Tax(name, gender, age, length, withers, weight, breed));
             }
-            else 
+            else
                 Console.WriteLine("Error adding dog: already exists");
             break;
         case "pudel":
@@ -100,7 +100,7 @@ class Program
                 Console.WriteLine("A {0} named {1} was added", breed, name);
                 dogs.Add(new Pudel(name, gender, age, length, withers, weight, breed));
             }
-            else 
+            else
                 Console.WriteLine("Error adding dog: already exists");
             break;
         case "labrador":
@@ -109,7 +109,7 @@ class Program
                 Console.WriteLine("A {0} named {1} was added", breed, name);
                 dogs.Add(new Labrador(name, gender, age, length, withers, weight, breed));
             }
-            else 
+            else
                 Console.WriteLine("Error adding dog: already exists");
             break;
         default:
@@ -165,13 +165,13 @@ class Program
     {
         Console.Write("What is the name of the dog?: ");
         string name = Console.ReadLine().ToLower();
-        int count = 0, g_i = 0; 
+        int count = 0, g_i = 0;
         for(int i = 0; i < dogs.Count; i++)
         {
             if(dogs[i].Name == name)
             {
                 count++;
-                g_i = i;  
+                g_i = i;
             }
         }
         if(count == 1)
@@ -183,7 +183,7 @@ class Program
             Console.WriteLine("There are no dogs with the name {0}", name);
 
         else
-        { 
+        {
             count = 0;
             Console.Write("There are multiple dogs with that name, please specify by entering it's breed: ");
             string breed = Console.ReadLine().ToLower();
@@ -202,7 +202,7 @@ class Program
             }
             else if(count == 0)
                 Console.WriteLine("There are no dogs with the breed {0} named {1}", breed, name);
-            else 
+            else
             {
                 count = 0;
                 Console.Write("There are multiple dogs with that breed, please specify by entering it's gender: ");
@@ -222,7 +222,7 @@ class Program
                 }
                 else if(count == 0)
                     Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2}", breed, name, gender);
-                else 
+                else
                 {
                     count = 0;
                     bool incorrect = false;
@@ -250,7 +250,7 @@ class Program
                     }
                     else if(count == 0)
                         Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2} with the age of {3}", breed, name, gender, age);
-                    else 
+                    else
                     {
                         count = 0;
                         incorrect = false;
@@ -278,7 +278,7 @@ class Program
                         }
                         else if(count == 0)
                             Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2} with the age of {3} & and it's wither is {4}", breed, name, gender, age, withers);
-                        else 
+                        else
                         {
                             count = 0;
                             incorrect = false;
@@ -307,7 +307,7 @@ class Program
                             }
                             else if(count == 0)
                                 Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2} with the age of {3}, weight of {4} & and it's wither is {5}", breed, name, gender, age, weight, withers);
-                            else 
+                            else
                             {
                                 count = 0;
                                 incorrect = false;
@@ -322,7 +322,8 @@ class Program
 
                                 for(int i = 0; i < dogs.Count; i++)
                                 {
-                                    if(dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender && dogs[i].Withers == withers)
+                                    if(dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender &&
+                                      dogs[i].Withers == withers && dogs[i].Weigth == weight && dogs[i].Length == length)
                                     {
                                         count++;
                                         g_i = i;
