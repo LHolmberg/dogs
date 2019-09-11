@@ -3,7 +3,6 @@ abstract class Dog
     protected string name, gender, breed;
     protected int age;
     protected double length, withers, weight;
-    private double tailLength;
 
     public Dog(string name, string gender, int age, double length,
     double withers, double weight, string breed)
@@ -15,8 +14,8 @@ abstract class Dog
         this.withers = withers;
         this.weight = weight;
         this.breed = breed;
-        this.tailLength = 0;
     }
+
     public virtual string GetAsString()
     {
         return "name: " + name + "\n" + "gender: " + gender + "\n" +
@@ -24,6 +23,7 @@ abstract class Dog
                 "withers: " + withers + "\n" + "weigth: " + weight + "\n" +
                 "breed: " + breed + "\n" + "tail length: ";
     }
+    
     public abstract double GetTailLength();
 
     public string Name

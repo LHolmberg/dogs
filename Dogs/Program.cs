@@ -45,94 +45,82 @@ class Program
         Console.Write("Gender: ");
         gender = Console.ReadLine().ToLower();
 
-        while(!incorrect)
+        while (!incorrect)
         {
             Console.Write("Age: ");
-            incorrect = int.TryParse(Console.ReadLine(), out age);
-            if(!incorrect)
+            incorrect = int.TryParse(Console.ReadLine().ToLower(), out age);
+            if (!incorrect)
                 Console.WriteLine("Please, enter an integer number!");
         }
         incorrect = false;
 
-        while(!incorrect)
+        while (!incorrect)
         {
             Console.Write("Length: ");
-            incorrect = double.TryParse(Console.ReadLine(), out length);
-            if(!incorrect)
+            incorrect = double.TryParse(Console.ReadLine().ToLower(), out length);
+            if (!incorrect)
                 Console.WriteLine("Please, enter a number!");
         }
         incorrect = false;
 
-        while(!incorrect)
+        while (!incorrect)
         {
             Console.Write("Withers: ");
-            incorrect = double.TryParse(Console.ReadLine(), out withers);
-            if(!incorrect)
+            incorrect = double.TryParse(Console.ReadLine().ToLower(), out withers);
+            if (!incorrect)
                 Console.WriteLine("Please, enter a number!");
         }
         incorrect = false;
 
-        while(!incorrect)
+        while (!incorrect)
         {
             Console.Write("Weight: ");
-            incorrect = double.TryParse(Console.ReadLine(), out weight);
-            if(!incorrect)
+            incorrect = double.TryParse(Console.ReadLine().ToLower(), out weight);
+            if (!incorrect)
                 Console.WriteLine("Please, enter a number!");
         }
 
         Console.Write("Breed: ");
         breed = Console.ReadLine().ToLower();
 
-        switch(breed)
-        {
-        case "tax":
-            if(CheckIfContains(name, gender, age, length, withers, weight, breed))
-            {
-                Console.WriteLine("A {0} named {1} was added", breed, name);
-                dogs.Add(new Tax(name, gender, age, length, withers, weight, breed));
-            }
-            else
-                Console.WriteLine("Error adding dog: already exists");
-            break;
-        case "pudel":
-            if(CheckIfContains(name, gender, age, length, withers, weight, breed))
-            {
-                Console.WriteLine("A {0} named {1} was added", breed, name);
-                dogs.Add(new Pudel(name, gender, age, length, withers, weight, breed));
-            }
-            else
-                Console.WriteLine("Error adding dog: already exists");
-            break;
-        case "labrador":
-            if(CheckIfContains(name, gender, age, length, withers, weight, breed))
-            {
-                Console.WriteLine("A {0} named {1} was added", breed, name);
-                dogs.Add(new Labrador(name, gender, age, length, withers, weight, breed));
-            }
-            else
-                Console.WriteLine("Error adding dog: already exists");
-            break;
-        default:
-            Console.WriteLine("There are currently no info about the breed {0}", breed);
-            break;
-        }
+        SuccessfullyAdd(name, gender, age, length, withers, weight, breed);
     }
 
-    bool CheckIfContains(string name, string gender, int age, double length, double withers, double weight, string breed)
+    void SuccessfullyAdd(string name, string gender, int age, double length, double withers, double weight, string breed)
     {
         int count = 0;
-        for(int i = 0; i < dogs.Count; i++)
+        for (int i = 0; i < dogs.Count; i++)
         {
-            if(dogs[i].Name == name && dogs[i].Gender == gender && dogs[i].Age == age && dogs[i].Length == length &&
+            if (dogs[i].Name == name && dogs[i].Gender == gender && dogs[i].Age == age && dogs[i].Length == length &&
             dogs[i].Withers == withers && dogs[i].Weigth == weight && dogs[i].Breed == breed)
             {
                 count++;
             }
         }
-        if(count == 1)
-            return false;
+
+        if (count == 1)
+            Console.WriteLine("Error adding dog: already exists");
         else
-            return true;
+        {
+            switch (breed)
+            {
+                case "tax":
+                    Console.WriteLine("A {0} named {1} was added", breed, name);
+                    dogs.Add(new Tax(name, gender, age, length, withers, weight, breed));
+                    break;
+                case "pudel":
+                    Console.WriteLine("A {0} named {1} was added", breed, name);
+                    dogs.Add(new Pudel(name, gender, age, length, withers, weight, breed));
+                    break;
+                case "labrador":
+                    Console.WriteLine("A {0} named {1} was added", breed, name);
+                    dogs.Add(new Labrador(name, gender, age, length, withers, weight, breed));
+                    break;
+                default:
+                    Console.WriteLine("There are currently no info about the breed {0}", breed);
+                    break;
+            }
+        }
     }
 
     void Print()
@@ -166,15 +154,16 @@ class Program
         Console.Write("What is the name of the dog?: ");
         string name = Console.ReadLine().ToLower();
         int count = 0, g_i = 0;
-        for(int i = 0; i < dogs.Count; i++)
+
+        for (int i = 0; i < dogs.Count; i++)
         {
-            if(dogs[i].Name == name)
+            if (dogs[i].Name == name)
             {
                 count++;
                 g_i = i;
             }
         }
-        if(count == 1)
+        if (count == 1)
         {
             Console.WriteLine("Dog named {0} was found at index {1}, here is a more detailed look: ", dogs[g_i].Name, g_i);
             Console.WriteLine(dogs[g_i].GetAsString());
@@ -187,154 +176,154 @@ class Program
             count = 0;
             Console.Write("There are multiple dogs with that name, please specify by entering it's breed: ");
             string breed = Console.ReadLine().ToLower();
-            for(int i = 0; i < dogs.Count; i++)
+            for (int i = 0; i < dogs.Count; i++)
             {
-                if(dogs[i].Name == name && dogs[i].Breed == breed)
+                if (dogs[i].Name == name && dogs[i].Breed == breed)
                 {
                     count++;
                     g_i = i;
                 }
             }
-            if(count == 1)
+            if (count == 1)
             {
                 Console.WriteLine("{0} named {1} was found at index {2}, here is a more detailed look: ", dogs[g_i].Breed, dogs[g_i].Name, g_i);
                 Console.WriteLine(dogs[g_i].GetAsString());
             }
-            else if(count == 0)
+            else if (count == 0)
                 Console.WriteLine("There are no dogs with the breed {0} named {1}", breed, name);
             else
             {
                 count = 0;
                 Console.Write("There are multiple dogs with that breed, please specify by entering it's gender: ");
                 string gender = Console.ReadLine().ToLower();
-                for(int i = 0; i < dogs.Count; i++)
+                for (int i = 0; i < dogs.Count; i++)
                 {
-                    if(dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender)
+                    if (dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender)
                     {
                         count++;
                         g_i = i;
                     }
                 }
-                if(count == 1)
+                if (count == 1)
                 {
                     Console.WriteLine("{0} named {1} was found at index {2}, here is a more detailed look: ", dogs[g_i].Breed, dogs[g_i].Name, g_i);
                     Console.WriteLine(dogs[g_i].GetAsString());
                 }
-                else if(count == 0)
+                else if (count == 0)
                     Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2}", breed, name, gender);
                 else
                 {
                     count = 0;
                     bool incorrect = false;
                     int age = 0;
-                    while(!incorrect)
+                    while (!incorrect)
                     {
                         Console.Write("There are multiple dogs with that gender, please specify by entering it's age: ");
                         incorrect = int.TryParse(Console.ReadLine(), out age);
-                        if(!incorrect)
+                        if (!incorrect)
                             Console.WriteLine("Please, enter an integer number!");
                     }
 
-                    for(int i = 0; i < dogs.Count; i++)
+                    for (int i = 0; i < dogs.Count; i++)
                     {
-                        if(dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender && dogs[i].Age == age)
+                        if (dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender && dogs[i].Age == age)
                         {
                             count++;
                             g_i = i;
                         }
                     }
-                    if(count == 1)
+                    if (count == 1)
                     {
                         Console.WriteLine("{0} named {1} was found at index {2}, here is a more detailed look: ", dogs[g_i].Breed, dogs[g_i].Name, g_i);
                         Console.WriteLine(dogs[g_i].GetAsString());
                     }
-                    else if(count == 0)
+                    else if (count == 0)
                         Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2} with the age of {3}", breed, name, gender, age);
                     else
                     {
                         count = 0;
                         incorrect = false;
                         double withers = 0;
-                        while(!incorrect)
+                        while (!incorrect)
                         {
                             Console.Write("There are multiple dogs with that age, please specify by entering it's withers: ");
                             incorrect = double.TryParse(Console.ReadLine(), out withers);
-                            if(!incorrect)
+                            if (!incorrect)
                                 Console.WriteLine("Please, enter an number!");
                         }
 
-                        for(int i = 0; i < dogs.Count; i++)
+                        for (int i = 0; i < dogs.Count; i++)
                         {
-                            if(dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender && dogs[i].Withers == withers)
+                            if (dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender && dogs[i].Withers == withers)
                             {
                                 count++;
                                 g_i = i;
                             }
                         }
-                        if(count == 1)
+                        if (count == 1)
                         {
                             Console.WriteLine("{0} named {1} was found at index {2}, here is a more detailed look: ", dogs[g_i].Breed, dogs[g_i].Name, g_i);
                             Console.WriteLine(dogs[g_i].GetAsString());
                         }
-                        else if(count == 0)
+                        else if (count == 0)
                             Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2} with the age of {3} & and it's wither is {4}", breed, name, gender, age, withers);
                         else
                         {
                             count = 0;
                             incorrect = false;
                             double weight = 0;
-                            while(!incorrect)
+                            while (!incorrect)
                             {
                                 Console.Write("There are multiple dogs with that withers, please specify by entering it's weight: ");
                                 incorrect = double.TryParse(Console.ReadLine(), out weight);
-                                if(!incorrect)
+                                if (!incorrect)
                                     Console.WriteLine("Please, enter an number!");
                             }
 
-                            for(int i = 0; i < dogs.Count; i++)
+                            for (int i = 0; i < dogs.Count; i++)
                             {
-                                if(dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender &&
+                                if (dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender &&
                                  dogs[i].Withers == withers && dogs[i].Weigth == weight)
                                 {
                                     count++;
                                     g_i = i;
                                 }
                             }
-                            if(count == 1)
+                            if (count == 1)
                             {
                                 Console.WriteLine("{0} named {1} was found at index {2}, here is a more detailed look: ", dogs[g_i].Breed, dogs[g_i].Name, g_i);
                                 Console.WriteLine(dogs[g_i].GetAsString());
                             }
-                            else if(count == 0)
+                            else if (count == 0)
                                 Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2} with the age of {3}, weight of {4} & and it's wither is {5}", breed, name, gender, age, weight, withers);
                             else
                             {
                                 count = 0;
                                 incorrect = false;
                                 double length = 0;
-                                while(!incorrect)
+                                while (!incorrect)
                                 {
                                     Console.Write("There are multiple dogs with that weight, please specify by entering it's length: ");
                                     incorrect = double.TryParse(Console.ReadLine(), out length);
-                                    if(!incorrect)
+                                    if (!incorrect)
                                         Console.WriteLine("Please, enter an number!");
                                 }
 
-                                for(int i = 0; i < dogs.Count; i++)
+                                for (int i = 0; i < dogs.Count; i++)
                                 {
-                                    if(dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender &&
+                                    if (dogs[i].Name == name && dogs[i].Breed == breed && dogs[i].Gender == gender &&
                                       dogs[i].Withers == withers && dogs[i].Weigth == weight && dogs[i].Length == length)
                                     {
                                         count++;
                                         g_i = i;
                                     }
                                 }
-                                if(count == 1)
+                                if (count == 1)
                                 {
                                     Console.WriteLine("{0} named {1} was found at index {2}, here is a more detailed look: ", dogs[g_i].Breed, dogs[g_i].Name, g_i);
                                     Console.WriteLine(dogs[g_i].GetAsString());
                                 }
-                                else if(count == 0)
+                                else if (count == 0)
                                     Console.WriteLine("There are no dogs with the breed {0} named {1} and is a {2} with the age of {3}, weight of {4}, length of {5} & and it's wither is {6}", breed, name, gender, age, weight, length, withers);
                             }
                         }
