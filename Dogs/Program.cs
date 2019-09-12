@@ -66,7 +66,7 @@ class Program
         Console.Write("Breed: ");
         string breed = Console.ReadLine().ToLower();
 
-        if(breed == "tax" || breed == "pudel" || breed == "labrador")
+        if(breed == "dachshund" || breed == "poodle" || breed == "labrador")
         {
             Console.Write("Name: ");
             string name = FirstCharToUpper(Console.ReadLine());
@@ -111,13 +111,13 @@ class Program
         {
             switch (breed)
             {
-                case "tax":
+                case "dachshund":
                     Console.WriteLine("A {0} named {1} was added", breed, name);
-                    dogList.Add(new Tax(name, gender, age, length, withers, weight, breed));
+                    dogList.Add(new Dachshund(name, gender, age, length, withers, weight, breed));
                     break;
-                case "pudel":
+                case "poodle":
                     Console.WriteLine("A {0} named {1} was added", breed, name);
-                    dogList.Add(new Pudel(name, gender, age, length, withers, weight, breed));
+                    dogList.Add(new Poodle(name, gender, age, length, withers, weight, breed));
                     break;
                 case "labrador":
                     Console.WriteLine("A {0} named {1} was added", breed, name);

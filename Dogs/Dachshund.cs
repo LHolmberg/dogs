@@ -1,7 +1,7 @@
-class Tax : Dog 
+class Dachshund : Dog 
 {
 
-    public Tax(string  name, string gender, int age, double length,
+    public Dachshund(string  name, string gender, int age, double length,
     double withers, double weight, string breed) : base(name,  gender,  age,
     length, withers, weight, breed)
     {}

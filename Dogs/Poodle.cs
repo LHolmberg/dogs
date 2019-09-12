@@ -1,7 +1,7 @@
-class Pudel : Dog 
+class Poodle : Dog 
 {
 
-    public Pudel(string  name, string gender, int age, double length,
+    public Poodle(string  name, string gender, int age, double length,
     double withers, double weight, string breed) : base(name,  gender,  age,
     length, withers, weight, breed)
     {}

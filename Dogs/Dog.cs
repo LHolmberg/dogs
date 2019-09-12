@@ -27,9 +27,9 @@ abstract class Dog : IComparable<Dog>
     
     public abstract double GetTailLength();
 
-    public int CompareTo(Dog obj)
+    public int CompareTo(Dog d)
     {
-        return this.Name.CompareTo(obj.Name);
+        return this.Name.CompareTo(d.Name);
     }
 
     public string Name
