@@ -22,7 +22,7 @@ abstract class Dog : IComparable<Dog>
     {
         return "name: " + name + "\n" + "breed: " + breed + "\n" + "gender: " + gender + "\n" +
                 "age: " + age + "\n" + "length: " + length + "\n" +
-                "withers: " + withers + "\n" + "weigth: " + weight + "\n" + "tail length: ";
+                "withers: " + withers + "\n" + "Weight: " + weight + "\n" + "tail length: ";
     }
     
     public abstract double GetTailLength();
@@ -57,7 +57,7 @@ abstract class Dog : IComparable<Dog>
         get { return withers; }
         set { this.withers = value; }
     }
-    public double Weigth
+    public double Weight
     {
         get { return weight; }
         set { this.weight = value; }
