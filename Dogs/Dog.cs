@@ -20,10 +20,9 @@ abstract class Dog : IComparable<Dog>
 
     public virtual string GetAsString()
     {
-        return "name: " + name + "\n" + "gender: " + gender + "\n" +
+        return "name: " + name + "\n" + "breed: " + breed + "\n" + "gender: " + gender + "\n" +
                 "age: " + age + "\n" + "length: " + length + "\n" +
-                "withers: " + withers + "\n" + "weigth: " + weight + "\n" +
-                "breed: " + breed + "\n" + "tail length: ";
+                "withers: " + withers + "\n" + "weigth: " + weight + "\n" + "tail length: ";
     }
     
     public abstract double GetTailLength();

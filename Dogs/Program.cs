@@ -110,7 +110,6 @@ class Program
         }
     }
 
-
     void Print()
     {
         if (dogs.Count >= 1)
@@ -211,6 +210,7 @@ class Program
             Console.WriteLine("Error");
         }
     }
+
     void Search()
     {
         Console.Write("What is the name of the dog?: ");
