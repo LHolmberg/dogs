@@ -227,7 +227,10 @@ class Program
             }
 
             else if(input == "remove")
+            {
                 dogList.Remove(dogList[id]);
+                ProgramLoop();
+            }
 
             else if(input == "edit")
                 EditDog(id);
@@ -260,9 +263,11 @@ class Program
                 g_i = i;
             }
         }
-
         if(count == 0)
+        {
             Console.WriteLine("That dog does not exist");
+            return;
+        }
         if(count == 1)
             FoundDog(g_i);
         else
@@ -281,7 +286,10 @@ class Program
                 }
             }
             if(count == 0)
+            {
                 Console.WriteLine("That dog does not exist");
+                return;
+            }
             if(count == 1)
                 FoundDog(g_i);
             else
@@ -298,7 +306,6 @@ class Program
                         g_i = i;
                     }
                 }
-
                 if(count == 0)
                 {
                     Console.WriteLine("That dog does not exist");
@@ -321,9 +328,11 @@ class Program
                             g_i = i;
                         }
                     }
-
                     if(count == 0)
+                    {
                         Console.WriteLine("That dog does not exist");
+                        return;
+                    }
                     if(count == 1)
                         FoundDog(g_i);
                     else
@@ -341,9 +350,11 @@ class Program
                                 g_i = i;
                             }
                         }
-
                         if(count == 0)
+                        {
                             Console.WriteLine("That dog does not exist");
+                            return;
+                        }
                         if(count == 1)
                             FoundDog(g_i);
                         else
@@ -361,9 +372,11 @@ class Program
                                     g_i = i;
                                 }
                             }
-
                             if(count == 0)
+                            {
                                 Console.WriteLine("That dog does not exist");
+                                return;
+                            }
                             if(count == 1)
                                 FoundDog(g_i);
                             else
@@ -383,9 +396,11 @@ class Program
                                         g_i = i;
                                     }
                                 }
-
                                 if(count == 0)
+                                {
                                     Console.WriteLine("That dog does not exist");
+                                    return;
+                                }
                                 if(count == 1)
                                     FoundDog(g_i);
                             }
