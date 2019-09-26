@@ -7,14 +7,14 @@ class Program
 
     static void Main(string[] args)
     {
-        Program program = new Program();
+        Program program = new Program(); //skapar en instans för program klassen
         program.ProgramLoop();
     }
 
     private void ProgramLoop()
     {
         string input;
-        while (true)
+        while (true) //frågar användaren vad han/hon vill göra tills användaren väljer t.ex "add" eller "exit", om fel: felmeddelande
         {
             Console.Write("enter a command, (use help to show existing commands): ");
             input = Console.ReadLine().ToLower();
@@ -38,14 +38,15 @@ class Program
     {
         while(true)
         {
-            try
+            try //Försök att parse användarens input till datatypen double
             {
                 Console.Write(msg);
                 age = double.Parse(Console.ReadLine());
                 break;
-            } catch(Exception e) 
+            } 
+            catch(Exception e) 
             {
-                Console.WriteLine("{0} : Wrong format", e.GetType().Name);
+                Console.WriteLine("{0} : Wrong format", e.GetType().Name); //felmeddelande
             }
         }
     }
@@ -161,7 +162,7 @@ class Program
         bool running = true;
         while(running == true)
         {
-            Console.Write("What do you want to edit about the dog?(use exit if you want to exit): ");
+            Console.Write("What do you want to edit about the dog? (use exit to exit or help for help): ");
             string answer = Console.ReadLine();
             string msg = "What do you want to change it to?: ";
             switch(answer.ToLower())
@@ -195,10 +196,48 @@ class Program
                 case "breed":
                     Console.Write(msg);
                     string breed = Console.ReadLine();
-                    dogList[id].Breed = breed;
+                    switch(breed)
+                    {
+                        case "labrador":
+                            dogList.Add(new Labrador(dogList[id].Name, dogList[id].Gender, 
+                                                dogList[id].Age, dogList[id].Length, dogList[id].Withers,
+                                                dogList[id].Weight, "labrador"));
+                            dogList.Remove(dogList[id]);
+                            id = dogList.Count - 1;
+                            break;
+                        case "dachshund":
+                            dogList.Add(new Dachshund(dogList[id].Name, dogList[id].Gender, 
+                                                dogList[id].Age, dogList[id].Length, dogList[id].Withers,
+                                                dogList[id].Weight, "dachshund"));
+                            dogList.Remove(dogList[id]);
+                            id = dogList.Count - 1;
+                            break;
+                        case "poodle":
+                            dogList.Add(new Poodle(dogList[id].Name, dogList[id].Gender, 
+                                                dogList[id].Age, dogList[id].Length, dogList[id].Withers,
+                                                dogList[id].Weight, "poodle"));
+                            dogList.Remove(dogList[id]);
+                            id = dogList.Count - 1;
+                            break;
+                        default:
+                            Console.WriteLine("No info about that breed");
+                            break;
+                    }
                     break;
                 case "exit":
                     running = false;
+                    break;
+                case "help":
+                        Console.WriteLine("###############");
+                        Console.WriteLine("changable properties: ");
+                        Console.WriteLine("age");
+                        Console.WriteLine("name");
+                        Console.WriteLine("gender");
+                        Console.WriteLine("length");
+                        Console.WriteLine("withers");
+                        Console.WriteLine("weight");
+                        Console.WriteLine("breed");
+                        Console.WriteLine("###############");
                     break;
                 default:
                     Console.WriteLine("You cannot change that attribute since it does not exist");
@@ -246,7 +285,6 @@ class Program
         }
     }
 
-
     private void Search()
     {
         int count = 0, g_i = 0;
@@ -257,9 +295,9 @@ class Program
 
         for(int i = 0; i < dogList.Count; i++)
         {
-            if(name == dogList[i].Name)
+            if(name == dogList[i].Name) //kollar om listans index "i"s namn är = användarens input
             {
-                count++;
+                count++; //plussa på count om den hittar ^^
                 g_i = i;
             }
         }
@@ -268,7 +306,7 @@ class Program
             Console.WriteLine("That dog does not exist");
             return;
         }
-        if(count == 1)
+        if(count == 1) //om count = 1 så har den hittat 1 hund och är då klar
             FoundDog(g_i);
         else
         {
@@ -279,7 +317,7 @@ class Program
 
             for(int i = 0; i < dogList.Count; i++)
             {
-                if(name == dogList[i].Name && breed == dogList[i].Breed)
+                if(name == dogList[i].Name && breed == dogList[i].Breed) // Samma här som ovan, och kommer vara samma på de andra.
                 {
                     count++;
                     g_i = i;
