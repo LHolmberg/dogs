@@ -59,7 +59,7 @@ class Program
     private string FirstCharToUpper(string str)
     {
         if (str == null)
-        return null;
+            return null;
 
         if (str.Length > 1)
             return char.ToUpper(str[0]) + str.Substring(1);
@@ -201,7 +201,7 @@ class Program
                 case "breed":
                     Console.Write(msg);
                     string breed = Console.ReadLine();
-                    switch(breed)
+                    switch(breed) //Om breed ändras så måste objektet också ändras till det nya breedet
                     {
                         case "labrador":
                             dogList.Add(new Labrador(dogList[id].Name, dogList[id].Gender, 
@@ -292,165 +292,154 @@ class Program
 
     private void Search()
     {
-        int count = 0, g_i = 0;
-
-        /* CHECK NAME */
         Console.Write("Name: ");
         string name = FirstCharToUpper(Console.ReadLine());
+        List<Dog> foundDogs = new List<Dog>();
 
-        for(int i = 0; i < dogList.Count; i++)
+        foreach(Dog dog in dogList) //Check for name
         {
-            if(name == dogList[i].Name) //kollar om listans index "i"s namn är = användarens input
+            if(dog.Name == name) //kollar om användarens input är lika med en hunds namn i listan
             {
-                count++; //plussa på count om den hittar ^^
-                g_i = i;
+                foundDogs.Add(dog); //om en hund vars namn är användarens input så har en hund hittats
             }
         }
-        if(count == 0)
+        if(foundDogs.Count >= 1) //om en eller flera hundar har hittats så kallas denna metod som sköter resten
+            CheckFoundDogs(foundDogs.Count,"name", "gender", foundDogs[0]);
+        else //annars så finns det inga hundar med det namnet
         {
-            Console.WriteLine("That dog does not exist");
+            Console.WriteLine("There are no dogs by that name");
             return;
         }
-        if(count == 1) //om count = 1 så har den hittat 1 hund och är då klar
-            FoundDog(g_i);
-        else
+        
+        if(dogList.Count > 1) //Check for gender
         {
-            /* CHECK BREED */
-            count = 0;
-            Console.Write("There are multiple dogs with that name, specify by entering its breed: ");
-            string breed = Console.ReadLine().ToLower();
-
-            for(int i = 0; i < dogList.Count; i++)
+            Console.Write("Gender: ");
+            string gender = Console.ReadLine();
+            for(int i = foundDogs.Count - 1; i >= 0; i--) /* går backlänges igenom listan med de hittade hundarna
+                                                                för att out of index errors */
             {
-                if(name == dogList[i].Name && breed == dogList[i].Breed) // Samma här som ovan, och kommer vara samma på de andra.
+                if(foundDogs[i].Gender != gender)
                 {
-                    count++;
-                    g_i = i;
+                    foundDogs.Remove(foundDogs[i]);
                 }
             }
-            if(count == 0)
-            {
-                Console.WriteLine("That dog does not exist");
-                return;
-            }
-            if(count == 1)
-                FoundDog(g_i);
+            if(foundDogs.Count >= 1) // Samma som innan
+                CheckFoundDogs(foundDogs.Count,"gender", "age", foundDogs[0]);
             else
             {
-                /* CHECK AGE */
-                count = 0;
-                TryInput("There are multiple dogs with that name, specify by entering its age: ", out double age);
-
-                for(int i = 0; i < dogList.Count; i++)
-                {
-                    if(name == dogList[i].Name && breed == dogList[i].Breed && age == dogList[i].Age)
-                    {
-                        count++;
-                        g_i = i;
-                    }
-                }
-                if(count == 0)
-                {
-                    Console.WriteLine("That dog does not exist");
-                    return;
-                }
-                if(count == 1)
-                    FoundDog(g_i);
-                else
-                {
-                    /* CHECK LENGTH */
-                    count = 0;
-                    TryInput("There are multiple dogs with that age, specify by entering its length: ", out double length);
-
-                    for(int i = 0; i < dogList.Count; i++)
-                    {
-                        if(name == dogList[i].Name && breed == dogList[i].Breed && 
-                        age == dogList[i].Age && length == dogList[i].Length)
-                        {
-                            count++;
-                            g_i = i;
-                        }
-                    }
-                    if(count == 0)
-                    {
-                        Console.WriteLine("That dog does not exist");
-                        return;
-                    }
-                    if(count == 1)
-                        FoundDog(g_i);
-                    else
-                    {
-                        /* CHECK WITHERS */
-                        count = 0;
-                        TryInput("There are multiple dogs with that length, specify by entering its withers: ", out double withers);
-
-                        for(int i = 0; i < dogList.Count; i++)
-                        {
-                            if(name == dogList[i].Name && breed == dogList[i].Breed && age == dogList[i].Age &&
-                            length == dogList[i].Length && withers == dogList[i].Withers)
-                            {
-                                count++;
-                                g_i = i;
-                            }
-                        }
-                        if(count == 0)
-                        {
-                            Console.WriteLine("That dog does not exist");
-                            return;
-                        }
-                        if(count == 1)
-                            FoundDog(g_i);
-                        else
-                        {
-                            /* CHECK WEIGHT */
-                            count = 0;
-                            TryInput("There are multiple dogs with that withers, specify by entering its weight: ", out double weight);
-
-                            for(int i = 0; i < dogList.Count; i++)
-                            {
-                                if(name == dogList[i].Name && breed == dogList[i].Breed && age == dogList[i].Age && 
-                                length == dogList[i].Length && withers == dogList[i].Withers && weight == dogList[i].Weight)
-                                {
-                                    count++;
-                                    g_i = i;
-                                }
-                            }
-                            if(count == 0)
-                            {
-                                Console.WriteLine("That dog does not exist");
-                                return;
-                            }
-                            if(count == 1)
-                                FoundDog(g_i);
-                            else
-                            {
-                                /* CHECK GENDER */
-                                count = 0;
-                                Console.Write("There are multiple dogs with that name, specify by entering its breed: ");
-                                string gender = Console.ReadLine().ToLower();
-
-                                for(int i = 0; i < dogList.Count; i++)
-                                {
-                                     if(name == dogList[i].Name && breed == dogList[i].Breed && age == dogList[i].Age && 
-                                     length == dogList[i].Length && withers == dogList[i].Withers && 
-                                     weight == dogList[i].Weight && gender == dogList[i].Gender)
-                                    {
-                                        count++;
-                                        g_i = i;
-                                    }
-                                }
-                                if(count == 0)
-                                {
-                                    Console.WriteLine("That dog does not exist");
-                                    return;
-                                }
-                                if(count == 1)
-                                    FoundDog(g_i);
-                            }
-                        }
-                    }
-                }
+                Console.WriteLine("There are no dogs with that combination");
+                return;
             }
         }
+        
+        if(dogList.Count > 1) //Check for age
+        {
+            TryInput("Age: ", out double age);
+            for(int i = foundDogs.Count - 1; i >= 0; i--)
+            {
+                if(foundDogs[i].Age != age)
+                    foundDogs.Remove(foundDogs[i]);
+            }
+            if(foundDogs.Count >= 1)
+                CheckFoundDogs(foundDogs.Count,"age", "length", foundDogs[0]);
+            else
+            {
+                Console.WriteLine("There are no dogs with that combination");
+                return;
+            }
+        }
+
+        if(dogList.Count > 1) //Check for length
+        {
+            TryInput("Length: ", out double length);
+            for(int i = foundDogs.Count - 1; i >= 0; i--)
+            {
+                if(foundDogs[i].Length != length)
+                    foundDogs.Remove(foundDogs[i]);
+            }
+            if(foundDogs.Count >= 1)
+                CheckFoundDogs(foundDogs.Count,"length", "withers", foundDogs[0]);
+            else
+            {
+                Console.WriteLine("There are no dogs with that combination");
+                return;
+            }
+        }
+
+        if(dogList.Count > 1) //Check for withers
+        {
+            TryInput("Withers: ", out double withers);
+            for(int i = foundDogs.Count - 1; i >= 0; i--)
+            {
+                if(foundDogs[i].Withers != withers)
+                    foundDogs.Remove(foundDogs[i]);
+            }
+            if(foundDogs.Count >= 1)
+                CheckFoundDogs(foundDogs.Count,"withers", "weight", foundDogs[0]);
+            else
+            {
+                Console.WriteLine("There are no dogs with that combination");
+                return;
+            }
+        }
+
+        if(dogList.Count > 1) //Check for weight
+        {
+            TryInput("Weight: ", out double weight);
+            for(int i = foundDogs.Count - 1; i >= 0; i--)
+            {
+                if(foundDogs[i].Weight != weight)
+                    foundDogs.Remove(foundDogs[i]);
+            }
+            if(foundDogs.Count >= 1)
+                CheckFoundDogs(foundDogs.Count,"weight", "breed", foundDogs[0]);
+            else
+            {
+                Console.WriteLine("There are no dogs with that combination");
+                return;
+            }
+        }
+
+        if(dogList.Count > 1) //Check for breed
+        {
+            Console.Write("Breed: ");
+            string breed = Console.ReadLine().ToLower();
+
+            for(int i = foundDogs.Count - 1; i >= 0; i--)
+            {
+                if(foundDogs[i].Breed != breed)
+                {
+                    foundDogs.Remove(foundDogs[i]);
+                }
+            }
+            if(foundDogs.Count >= 1)
+                CheckFoundDogs(foundDogs.Count,"breed", "null", foundDogs[0]);
+            else
+            {
+                Console.WriteLine("There are no dogs with that combination");
+                return;
+            }
+        }
+    }
+
+    void CheckFoundDogs(int length,string info,string next, Dog dog)
+    {
+        if(length == 0)
+        {
+            Console.WriteLine("No dogs by that " + info);
+            return;
+        }
+        else if(length == 1)
+        {
+           for(int i = 0; i < dogList.Count; i++)
+           {
+               if(dogList[i] == dog)
+               {
+                   FoundDog(i);
+               }
+           }
+        }
+        else if(length > 1)
+            Console.WriteLine("There are multiple dogs with that " + info + ", Please specify");
     }
 }
