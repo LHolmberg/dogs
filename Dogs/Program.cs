@@ -1,10 +1,15 @@
-﻿using System;
+﻿/*
+    Author: Lukas Holmberg
+    Course: PRRPRR02
+*/
+
+using System;
 using System.Collections.Generic;
 
 class Program
 {
     private List<Dog> dogList = new List<Dog>();
-
+    
     static void Main(string[] args)
     {
         Program program = new Program(); //skapar en instans för program klassen
@@ -33,7 +38,7 @@ class Program
                 Console.WriteLine("error");
         }
     }
-
+    
     private void TryInput(string msg, out double age)
     {
         while(true)

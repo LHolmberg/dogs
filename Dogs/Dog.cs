@@ -1,3 +1,8 @@
+/*
+    Author: Lukas Holmberg
+    Course: PRRPRR02
+*/
+
 using System;
 
 abstract class Dog : IComparable<Dog>

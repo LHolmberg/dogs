@@ -1,3 +1,8 @@
+/*
+    Author: Lukas Holmberg
+    Course: PRRPRR02
+*/
+
 class Poodle : Dog 
 {
 
