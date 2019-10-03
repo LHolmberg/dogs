@@ -304,7 +304,7 @@ class Program
             }
         }
         if(foundDogs.Count >= 1) //om en eller flera hundar har hittats så kallas denna metod som sköter resten
-            CheckFoundDogs(foundDogs.Count,"name", "gender", foundDogs[0]);
+            CheckFoundDogs(foundDogs.Count,"name", foundDogs[0]);
         else //annars så finns det inga hundar med det namnet
         {
             Console.WriteLine("There are no dogs by that name");
@@ -324,7 +324,7 @@ class Program
                 }
             }
             if(foundDogs.Count >= 1) // Samma som innan
-                CheckFoundDogs(foundDogs.Count,"gender", "age", foundDogs[0]);
+                CheckFoundDogs(foundDogs.Count,"gender", foundDogs[0]);
             else
             {
                 Console.WriteLine("There are no dogs with that combination");
@@ -341,7 +341,7 @@ class Program
                     foundDogs.Remove(foundDogs[i]);
             }
             if(foundDogs.Count >= 1)
-                CheckFoundDogs(foundDogs.Count,"age", "length", foundDogs[0]);
+                CheckFoundDogs(foundDogs.Count,"age", foundDogs[0]);
             else
             {
                 Console.WriteLine("There are no dogs with that combination");
@@ -358,7 +358,7 @@ class Program
                     foundDogs.Remove(foundDogs[i]);
             }
             if(foundDogs.Count >= 1)
-                CheckFoundDogs(foundDogs.Count,"length", "withers", foundDogs[0]);
+                CheckFoundDogs(foundDogs.Count,"length", foundDogs[0]);
             else
             {
                 Console.WriteLine("There are no dogs with that combination");
@@ -375,7 +375,7 @@ class Program
                     foundDogs.Remove(foundDogs[i]);
             }
             if(foundDogs.Count >= 1)
-                CheckFoundDogs(foundDogs.Count,"withers", "weight", foundDogs[0]);
+                CheckFoundDogs(foundDogs.Count,"withers", foundDogs[0]);
             else
             {
                 Console.WriteLine("There are no dogs with that combination");
@@ -392,7 +392,7 @@ class Program
                     foundDogs.Remove(foundDogs[i]);
             }
             if(foundDogs.Count >= 1)
-                CheckFoundDogs(foundDogs.Count,"weight", "breed", foundDogs[0]);
+                CheckFoundDogs(foundDogs.Count,"weight", foundDogs[0]);
             else
             {
                 Console.WriteLine("There are no dogs with that combination");
@@ -413,7 +413,7 @@ class Program
                 }
             }
             if(foundDogs.Count >= 1)
-                CheckFoundDogs(foundDogs.Count,"breed", "null", foundDogs[0]);
+                CheckFoundDogs(foundDogs.Count,"breed", foundDogs[0]);
             else
             {
                 Console.WriteLine("There are no dogs with that combination");
@@ -422,7 +422,7 @@ class Program
         }
     }
 
-    void CheckFoundDogs(int length,string info,string next, Dog dog)
+    void CheckFoundDogs(int length, string info, Dog dog)
     {
         if(length == 0)
         {
